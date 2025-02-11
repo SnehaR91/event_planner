@@ -65,11 +65,17 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'event_planner.urls'
 
+import os
+from pathlib import Path
+
+# Define BASE_DIR correctly
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': [BASE_DIR / "templates"],  # Fix here: Use BASE_DIR
+        'APP_DIRS': True,  # This should be True to auto-detect templates inside apps
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -80,6 +86,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'event_planner.wsgi.application'
 
@@ -117,6 +124,9 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/login/"
 
 
 # Internationalization
