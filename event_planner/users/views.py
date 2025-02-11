@@ -19,7 +19,7 @@ def register(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.is_active = False  # Prevent login before email verification
+            user.is_active = True # Prevent login before email verification
             user.save()
             return redirect('login')
     else:
@@ -34,6 +34,9 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm
+from django.contrib.auth import get_user_model
+
+
 
 def user_login(request):
     if request.method == 'POST':
@@ -42,10 +45,9 @@ def user_login(request):
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             user = authenticate(request, username=email, password=password)
-
             if user is not None:
                 login(request, user)
-                return render(request, 'users/home.html')  # Redirect to events page
+                return render(request, 'users/home.html') 
             else:
                 messages.error(request, "Invalid email or password.")
     

@@ -98,7 +98,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'event_planner_db',  # Database name
-        'USER': 'event_admin',  # PostgreSQL username
+        'USER': 'postgres',  # PostgreSQL username
         'PASSWORD': 'Ttlsh1wwy@',  # PostgreSQL password
         'HOST': 'localhost',  # Running PostgreSQL locally
         'PORT': '5432',  # Default PostgreSQL port
